@@ -5,6 +5,7 @@ class Vehicle
     @make = make
     @model = model
     @year = year.to_i()
+    @id = @@vehicles.length().+(1)
   end
 
   define_singleton_method(:all) do
@@ -30,7 +31,21 @@ class Vehicle
   define_method(:year) do
     @year
   end
-  
+
+  define_method(:id) do
+    @id
+  end
+
+  define_singleton_method(:find) do |identification|
+    found_vehicle = nil
+    @@vehicles.each() do |vehicle|
+      if vehicle.id() == identification.to_i()
+        found_vehicle = vehicle
+      end
+    end
+  found_vehicle
+  end
+
   define_method(:age) do
     current_year = Time.new().year()
     current_year.-(@year)

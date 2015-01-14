@@ -30,6 +30,14 @@ describe(Vehicle) do
     end
   end
 
+  describe("#id") do
+    it("returns the specific id for a vehicle") do
+      test_vehicle = Vehicle.new("Toyota", "Prius", "2000")
+      test_vehicle.save()
+      expect(test_vehicle.id()).to(eq(1))
+    end
+  end
+
   describe(".all") do
     it("is empty at first") do
     expect(Vehicle.all()).to(eq([]))
@@ -48,6 +56,17 @@ describe(Vehicle) do
     test_vehicle = Vehicle.new("Toyota", "Prius", "2000")
     test_vehicle.save()
     expect(Vehicle.clear()).to(eq([]))
+    end
+  end
+
+  describe(".find") do
+    it("finds a specific car by its id") do
+      test_vehicle = Vehicle.new("GM", "gremlin", "1984")
+      test_vehicle.save()
+      test_vehicle2 = Vehicle.new("Honda", "element", "2003")
+      test_vehicle2.save()
+      expect(Vehicle.find(test_vehicle2.id()))
+        .to(eq(test_vehicle2))
     end
   end
 
